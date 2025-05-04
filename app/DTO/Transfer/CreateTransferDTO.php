@@ -5,7 +5,9 @@ namespace App\DTO\Transfer;
 class CreateTransferDTO
 {
     public string $payer_id;
+
     public string $payee_id;
+
     public float $value;
 
     public function __construct(string $payer_id, string $payee_id, float $value)

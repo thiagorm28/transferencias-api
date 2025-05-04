@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
         'name',
@@ -19,7 +19,7 @@ class User extends Authenticatable
         'type',
         'password',
         'cpf_cnpj',
-        'wallet'
+        'wallet',
     ];
 
     protected $hidden = [

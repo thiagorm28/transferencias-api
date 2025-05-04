@@ -2,13 +2,11 @@
 
 namespace Tests\Unit\Jobs;
 
-use Tests\TestCase;
-use App\Models\Transfer;
-use Illuminate\Support\Facades\Http;
-use App\Jobs\SendNotificationJob;
 use App\Jobs\SendTransferNotificationJob;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Tests\TestCase;
 
 class SendTransferNotificationJobTest extends TestCase
 {

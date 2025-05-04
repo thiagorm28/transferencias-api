@@ -20,12 +20,11 @@ class MakeTransferRequest extends FormRequest
     {
         // Valida se o usuário é comerciante, se for não pode fazer a transferência
         if ($this->payer->isShopkeeper()) {
-            throw new ShopkeeperTransferException();
+            throw new ShopkeeperTransferException;
         }
 
         return true;
     }
-
 
     public function rules(): array
     {
@@ -36,7 +35,7 @@ class MakeTransferRequest extends FormRequest
                 function ($attribute, $value, $fail) { // Valida se o pagador possui o valor da transferência no saldo
                     $user = $this->user();
 
-                    if (!$user->hasEnoughBalance($value)) {
+                    if (! $user->hasEnoughBalance($value)) {
                         $fail('O valor da transferência não pode ser maior que o saldo disponível na carteira.');
                     }
                 },
@@ -49,7 +48,7 @@ class MakeTransferRequest extends FormRequest
                         $fail('O destinatário da transferência deve ser diferente do remetente.');
                     }
                 },
-            ]
+            ],
         ];
     }
 }

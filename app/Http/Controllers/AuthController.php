@@ -5,24 +5,24 @@ namespace App\Http\Controllers;
 use App\DTO\Auth\LoginDTO;
 use App\DTO\Auth\RegisterUserDTO;
 use App\Exceptions\Auth\WrongPasswordExeception;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
-use Illuminate\Http\Request;
 use App\Repositories\Auth\RegisterUserRepository;
 use App\Services\Auth\LoginService;
 use Exception;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
     private $loginService;
+
     private $registerUserRepository;
 
     public function __construct()
     {
-        $this->loginService = new LoginService();
-        $this->registerUserRepository = new RegisterUserRepository();
+        $this->loginService = new LoginService;
+        $this->registerUserRepository = new RegisterUserRepository;
     }
 
     /**

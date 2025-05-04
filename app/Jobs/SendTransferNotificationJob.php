@@ -18,13 +18,14 @@ use Illuminate\Support\Facades\Log;
  * - `$data` (array): Dados a serem enviados na notificação. São fornecidos ao job
  *   no momento da criação.
  */
-
 class SendTransferNotificationJob implements ShouldQueue
 {
     use Queueable;
 
     public $tries = 10;
+
     public $backoff = 1;
+
     protected $data;
 
     public function __construct(array $data)
@@ -37,13 +38,13 @@ class SendTransferNotificationJob implements ShouldQueue
         $url = config('transfer.notification_url');
         $response = Http::timeout(5)->post($url, $this->data);
 
-        if (!$response->successful()) {
+        if (! $response->successful()) {
             throw new \Exception('Falha no envio da notificação');
         }
 
         Log::info('Notificação enviada com sucesso', [
             'data' => $this->data,
-            'response' => $response->body()
+            'response' => $response->body(),
         ]);
     }
 
@@ -52,7 +53,7 @@ class SendTransferNotificationJob implements ShouldQueue
         Log::error('Falha final ao enviar notificação', [
             'exception' => $e->getMessage(),
             'data' => $this->data,
-            'error_code' => $e->getCode()
+            'error_code' => $e->getCode(),
         ]);
     }
 }

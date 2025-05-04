@@ -11,7 +11,7 @@ class TransferTest extends TestCase
 {
     use RefreshDatabase;
 
-    function fakeSuccessfulTransferHttp()
+    public function fakeSuccessfulTransferHttp()
     {
         Http::fake([
             config('transfer.auth_url') => Http::response(['message' => 'Autorizado'], 200),
@@ -31,7 +31,7 @@ class TransferTest extends TestCase
 
         $token = $payer->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee' => $payee->id,
                 'value' => 100,
@@ -51,7 +51,7 @@ class TransferTest extends TestCase
         $payee = User::factory()->create();
         $token = $shopkeeper->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee_id' => $payee->id,
                 'value' => 100,
@@ -69,7 +69,7 @@ class TransferTest extends TestCase
 
         $token = $payer->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee' => $payer->id,
                 'value' => 100,
@@ -88,7 +88,7 @@ class TransferTest extends TestCase
 
         $token = $payer->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee' => $payer->id,
                 'value' => 100,
@@ -112,7 +112,7 @@ class TransferTest extends TestCase
 
         $token = $payer->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee' => $payee->id,
                 'value' => 100,

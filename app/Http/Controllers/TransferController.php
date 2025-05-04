@@ -15,7 +15,7 @@ class TransferController extends Controller
 
     public function __construct()
     {
-        $this->makeTransferService = new MakeTransferService();
+        $this->makeTransferService = new MakeTransferService;
     }
 
     /**

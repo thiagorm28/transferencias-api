@@ -13,7 +13,7 @@ class TransferRepository
             [
                 'payer_id' => $dto->payer_id,
                 'payee_id' => $dto->payee_id,
-                'value' => $dto->value
+                'value' => $dto->value,
             ]
         );
     }

@@ -14,7 +14,7 @@ class RegisterUserRepository
             'email' => $dto->email,
             'cpf_cnpj' => $dto->cpf_cnpj,
             'password' => bcrypt($dto->password),
-            'type' => $dto->type
+            'type' => $dto->type,
         ]);
     }
 }

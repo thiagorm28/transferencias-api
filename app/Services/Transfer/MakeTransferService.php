@@ -15,17 +15,21 @@ use Illuminate\Support\Facades\DB;
 class MakeTransferService
 {
     private $externalAuthRepository;
+
     private $transferRepository;
+
     private $walletRepository;
+
     private $sendTransferNotificationService;
 
     public function __construct()
     {
-        $this->sendTransferNotificationService = new SendTransferNotificationService();
-        $this->externalAuthRepository = new ExternalAuthRepository();
-        $this->transferRepository = new TransferRepository();
-        $this->walletRepository = new WalletRepository();
+        $this->sendTransferNotificationService = new SendTransferNotificationService;
+        $this->externalAuthRepository = new ExternalAuthRepository;
+        $this->transferRepository = new TransferRepository;
+        $this->walletRepository = new WalletRepository;
     }
+
     public function execute(MakeTransferDTO $dto): void
     {
         DB::beginTransaction();

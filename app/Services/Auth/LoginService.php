@@ -13,8 +13,8 @@ class LoginService
     {
         $user = User::where('email', $dto->email)->first();
 
-        if (!$user || !Hash::check($dto->password, $user->password)) {
-            throw new WrongPasswordExeception();
+        if (! $user || ! Hash::check($dto->password, $user->password)) {
+            throw new WrongPasswordExeception;
         }
 
         return $user->createToken('auth_token')->plainTextToken;
