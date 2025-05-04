@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  title: API de Transferências
+  version: 1.0.0
+  description: API RESTful para transferências entre usuários e lojistas
+servers:
+  - url: http://localhost:8000/api
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    Auth:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    Register:
+      allOf:
+        - $ref: "#/components/schemas/Auth"
+        - type: object
+          properties:
+            name:
+              type: string
+            cpf:
+              type: string
+            type:
+              type: string
+              enum: [common, shopkeeper]
+
+    Transfer:
+      type: object
+      properties:
+        payee_id:
+          type: integer
+        amount:
+          type: number
+          format: float
+
+paths:
+  /register:
+    post:
+      summary: Registra um novo usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Register"
+      responses:
+        "201":
+          description: Usuário registrado
+        "400":
+          description: CPF ou e-mail já registrado
+
+  /login:
+    post:
+      summary: Autentica o usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Auth"
+      responses:
+        "200":
+          description: Token retornado
+        "401":
+          description: Credenciais inválidas
+
+  /logout:
+    post:
+      summary: Realiza logout
+      security:
+        - bearerAuth: []
+      responses:
+        "204":
+          description: Logout feito com sucesso
+
+  /transfer:
+    post:
+      summary: Realiza uma transferência
+      description: Efetua uma transferência entre usuários.
+        O usuário autenticado é considerado o pagador (`payer`).
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Transfer"
+      responses:
+        "201":
+          description: Transferência realizada
+        "403":
+          description: Lojistas não podem realizar transferências. | Autorização negada pelo serviço externo.
+        "422":
+          description: Erro de validação (ex O valor da transferência não pode ser maior que o saldo disponível na carteira.)
+        "503":
+          description: Serviço de autorização indisponível

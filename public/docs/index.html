@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Docs</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/redoc@2.0.0-rc.70/bundles/redoc.standalone.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  </head>
+  <body>
+    <h1>API Documentation</h1>
+
+    <div id="redoc-container"></div>
+
+    <script>
+      // Função para carregar o arquivo YAML
+      function loadYAML(url) {
+        return fetch(url)
+          .then((response) => response.text()) // Pega o conteúdo do arquivo como texto
+          .then((yamlText) => jsyaml.load(yamlText)); // Converte YAML para JSON
+      }
+
+      // Aguardar o carregamento do Redoc e carregar o arquivo YAML
+      window.onload = function () {
+        loadYAML('openapi.yaml')
+          .then((spec) => {
+            // Inicializa o Redoc com o JSON convertido
+            Redoc.init(spec, {}, document.getElementById('redoc-container'));
+          })
+          .catch((error) => {
+            console.error('Erro ao carregar o YAML:', error);
+          });
+      };
+    </script>
+  </body>
+</html>
