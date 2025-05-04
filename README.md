@@ -52,7 +52,7 @@ docker exec -it transferencias_api bash
 php artisan migrate
 ```
 
-## 🔍 Documentação da API
+## 📚 Documentação da API
 
 Você pode ver a documentação da API na URL:
 
@@ -66,4 +66,12 @@ Você pode testar endpoints usando ferramentas como Postman ou Insomnia. O proje
 
 ```bash
 http://localhost:8000/api
+```
+
+## 🧪 Rodar os testes da API
+
+Você pode os testes da API usando o comando (banco de dados de teste já configurado, é iniciado dentro do docker, e configurado com base no .env.testing):
+
+```bash
+docker exec -it transferencias_api php artisan test
 ```
