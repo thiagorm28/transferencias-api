@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTO\Auth\LoginDTO;
 use App\DTO\Auth\RegisterUserDTO;
-use App\Exceptions\WrongPasswordExeception;
+use App\Exceptions\Auth\WrongPasswordExeception;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;

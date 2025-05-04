@@ -38,5 +38,7 @@ class TransferController extends Controller
                 'error' => $e->getMessage(),
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+
+        return response()->json(['message' => 'Transferência realizada com sucesso!'], Response::HTTP_CREATED);
     }
 }

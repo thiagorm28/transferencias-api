@@ -3,7 +3,7 @@
 namespace App\Services\Auth;
 
 use App\DTO\Auth\LoginDTO;
-use App\Exceptions\WrongPasswordExeception;
+use App\Exceptions\Auth\WrongPasswordExeception;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 

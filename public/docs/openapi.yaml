@@ -100,7 +100,7 @@ paths:
               $ref: "#/components/schemas/Transfer"
       responses:
         "201":
-          description: Transferência realizada
+          description: Transferência realizada com sucesso!
         "403":
           description: Lojistas não podem realizar transferências. | Autorização negada pelo serviço externo.
         "422":
