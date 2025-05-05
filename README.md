@@ -75,3 +75,11 @@ Você pode os testes da API usando o comando (banco de dados de teste já config
 ```bash
 docker exec -it transferencias_api php artisan test
 ```
+
+## 📊 Rodar com Coverage
+
+Ao rodar, será salvo o arquivo index.html na pasta coverage, basta abrí-lo no navegador para ver a cobertura dos teste
+
+```bash
+docker exec -it composer coverage
+```
