@@ -32,7 +32,7 @@ class TransferTest extends TestCase
 
         $token = $payer->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee' => $payee->id,
                 'value' => 100,
@@ -52,7 +52,7 @@ class TransferTest extends TestCase
         $payee = User::factory()->create();
         $token = $shopkeeper->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee_id' => $payee->id,
                 'value' => 100,
@@ -70,7 +70,7 @@ class TransferTest extends TestCase
 
         $token = $payer->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee' => $payer->id,
                 'value' => 100,
@@ -89,7 +89,7 @@ class TransferTest extends TestCase
 
         $token = $payer->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee' => $payer->id,
                 'value' => 100,
@@ -113,7 +113,7 @@ class TransferTest extends TestCase
 
         $token = $payer->createToken('TestToken')->plainTextToken;
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $token)
+        $response = $this->withHeader('Authorization', 'Bearer '.$token)
             ->postJson('/api/transfer', [
                 'payee' => $payee->id,
                 'value' => 100,
