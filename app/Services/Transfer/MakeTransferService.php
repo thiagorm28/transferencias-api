@@ -6,28 +6,22 @@ use App\DTO\Transfer\CreateTransferDTO;
 use App\DTO\Transfer\MakeTransferDTO;
 use App\DTO\Wallet\ChangeUserWalletBalanceDTO;
 use App\Models\User;
-use App\Repositories\Transfer\ExternalAuthRepository;
-use App\Repositories\Transfer\TransferRepository;
-use App\Repositories\Wallet\WalletRepository;
+use App\Repositories\Transfer\IExternalAuthRepository;
+use App\Repositories\Transfer\ITransferRepository;
+use App\Repositories\Wallet\IWalletRepository;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
 class MakeTransferService
 {
-    private $externalAuthRepository;
-
-    private $transferRepository;
-
-    private $walletRepository;
-
     private $sendTransferNotificationService;
 
-    public function __construct()
-    {
+    public function __construct(
+        private IExternalAuthRepository $externalAuthRepository,
+        private ITransferRepository $transferRepository,
+        private IWalletRepository $walletRepository,
+    ) {
         $this->sendTransferNotificationService = new SendTransferNotificationService;
-        $this->externalAuthRepository = new ExternalAuthRepository;
-        $this->transferRepository = new TransferRepository;
-        $this->walletRepository = new WalletRepository;
     }
 
     public function execute(MakeTransferDTO $dto): void

@@ -11,12 +11,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class TransferController extends Controller
 {
-    private $makeTransferService;
-
-    public function __construct()
-    {
-        $this->makeTransferService = new MakeTransferService;
-    }
+    public function __construct(private MakeTransferService $makeTransferService) {}
 
     /**
      * Faz uma nova transferência.

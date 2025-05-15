@@ -5,11 +5,11 @@ namespace App\Repositories\Transfer;
 use App\DTO\Transfer\CreateTransferDTO;
 use App\Models\Transfer;
 
-class TransferRepository
+class TransferRepository implements ITransferRepository
 {
-    public function create(CreateTransferDTO $dto): mixed
+    public function create(CreateTransferDTO $dto): void
     {
-        return Transfer::create(
+        Transfer::create(
             [
                 'payer_id' => $dto->payer_id,
                 'payee_id' => $dto->payee_id,

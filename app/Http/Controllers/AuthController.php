@@ -3,27 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\DTO\Auth\LoginDTO;
+use App\DTO\Auth\LogoutDTO;
 use App\DTO\Auth\RegisterUserDTO;
-use App\Exceptions\Auth\WrongPasswordExeception;
+use App\Exceptions\Auth\InvalidCredentialsException;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterUserRequest;
-use App\Repositories\Auth\RegisterUserRepository;
-use App\Services\Auth\LoginService;
+use App\Services\Auth\AuthService;
 use Exception;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
-    private $loginService;
-
-    private $registerUserRepository;
-
-    public function __construct()
-    {
-        $this->loginService = new LoginService;
-        $this->registerUserRepository = new RegisterUserRepository;
-    }
+    public function __construct(private AuthService $authService) {}
 
     /**
      * Cria um novo usuário
@@ -31,7 +23,7 @@ class AuthController extends Controller
     public function register(RegisterUserRequest $request)
     {
         try {
-            $this->registerUserRepository->execute(new RegisterUserDTO(
+            $this->authService->registerUser(new RegisterUserDTO(
                 name: $request->name,
                 email: $request->email,
                 cpf_cnpj: $request->cpf_cnpj,
@@ -51,11 +43,11 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         try {
-            $token = $this->loginService->execute(new LoginDTO(
+            $token = $this->authService->login(new LoginDTO(
                 email: $request->email,
                 password: $request->password,
             ));
-        } catch (WrongPasswordExeception $e) {
+        } catch (InvalidCredentialsException $e) {
             return response()->json([
                 'error' => $e->getMessage(),
             ], $e->getCode());
@@ -74,7 +66,13 @@ class AuthController extends Controller
      */
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
+        try {
+            $this->authService->logout(new LogoutDTO(
+                token: $request->bearerToken()
+            ));
+        } catch (Exception $e) {
+            return response()->json(['message' => 'Houve um erro ao tentar sair do sistema!'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
 
         return response()->json(['message' => 'Logout realizado com sucesso.']);
     }

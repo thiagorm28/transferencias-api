@@ -5,7 +5,7 @@ namespace App\Repositories\Wallet;
 use App\DTO\Wallet\ChangeUserWalletBalanceDTO;
 use App\Models\User;
 
-class WalletRepository
+class WalletRepository implements IWalletRepository
 {
     public function debitValueFromUserWallet(ChangeUserWalletBalanceDTO $dto)
     {

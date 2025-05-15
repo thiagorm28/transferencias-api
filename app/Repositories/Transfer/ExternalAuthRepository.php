@@ -7,7 +7,7 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 
-class ExternalAuthRepository
+class ExternalAuthRepository implements IExternalAuthRepository
 {
     public function authorize(): bool
     {
