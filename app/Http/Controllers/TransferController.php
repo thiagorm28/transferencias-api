@@ -20,7 +20,7 @@ class TransferController extends Controller
     {
         try {
             $this->makeTransferService->execute(new MakeTransferDTO(
-                payer: $request->payer,
+                payer_id: $request->user()->id,
                 payee_id: $request->payee,
                 value: $request->value,
             ));

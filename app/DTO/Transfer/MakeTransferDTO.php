@@ -2,19 +2,17 @@
 
 namespace App\DTO\Transfer;
 
-use App\Models\User;
-
 class MakeTransferDTO
 {
-    public User $payer;
+    public string $payer_id;
 
     public string $payee_id;
 
     public float $value;
 
-    public function __construct(User $payer, string $payee_id, float $value)
+    public function __construct(string $payer_id, string $payee_id, float $value)
     {
-        $this->payer = $payer;
+        $this->payer_id = $payer_id;
         $this->payee_id = $payee_id;
         $this->value = $value;
     }

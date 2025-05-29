@@ -8,8 +8,8 @@ use App\Repositories\Transfer\ExternalAuthRepository;
 use App\Repositories\Transfer\IExternalAuthRepository;
 use App\Repositories\Transfer\ITransferRepository;
 use App\Repositories\Transfer\TransferRepository;
-use App\Repositories\Wallet\IWalletRepository;
-use App\Repositories\Wallet\WalletRepository;
+use App\Repositories\User\IUserRepository;
+use App\Repositories\User\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,8 +28,8 @@ class AppServiceProvider extends ServiceProvider
             TransferRepository::class
         );
         $this->app->bind(
-            IWalletRepository::class,
-            WalletRepository::class
+            IUserRepository::class,
+            UserRepository::class
         );
         $this->app->bind(
             IAuthRepository::class,

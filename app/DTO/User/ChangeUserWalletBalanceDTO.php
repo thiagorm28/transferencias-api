@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO\Wallet;
+namespace App\DTO\User;
 
 class ChangeUserWalletBalanceDTO
 {

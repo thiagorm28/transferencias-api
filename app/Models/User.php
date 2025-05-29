@@ -46,16 +46,6 @@ class User extends Authenticatable
         return $this->hasMany(Transfer::class, 'payee_id');
     }
 
-    public function isShopkeeper(): bool
-    {
-        return $this->type === UserType::SHOPKEEPER->value;
-    }
-
-    public function hasEnoughBalance(float $value): bool
-    {
-        return $this->wallet >= $value;
-    }
-
     public function debit(float $value): void
     {
         $this->wallet -= $value;

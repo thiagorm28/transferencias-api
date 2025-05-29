@@ -2,12 +2,13 @@
 
 namespace App\Exceptions\Transfer;
 
-use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class ShopkeeperTransferException extends AuthorizationException
+class ShopkeeperTransferException extends HttpException
 {
-    public function __construct($message = 'Lojistas não podem realizar transferências.')
+    public function __construct($message = 'Lojistas não podem realizar transferências.', int $statusCode = Response::HTTP_FORBIDDEN,)
     {
-        parent::__construct($message);
+        parent::__construct($statusCode, $message);
     }
 }
