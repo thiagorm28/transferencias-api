@@ -5,6 +5,7 @@ namespace App\Services\Transfer;
 use App\DTO\Transfer\CreateTransferDTO;
 use App\DTO\Transfer\MakeTransferDTO;
 use App\DTO\User\ChangeUserWalletBalanceDTO;
+use App\Events\TransferCompleted;
 use App\Exceptions\Transfer\NotEnoughBalanceException;
 use App\Exceptions\Transfer\ShopkeeperTransferException;
 use App\Repositories\Transfer\IExternalAuthRepository;
@@ -40,7 +41,7 @@ class MakeTransferService
             ));
 
             // Coloca notificação na fila para ser enviada
-            $this->sendTransferNotificationService->execute($dto->payee_id);
+            event(new TransferCompleted($dto->payee_id));
         } catch (Exception $e) {
             DB::rollBack();
             throw $e;
