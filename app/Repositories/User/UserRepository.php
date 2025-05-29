@@ -27,13 +27,13 @@ class UserRepository implements IUserRepository
 
     public function debitValueFromUserWallet(ChangeUserWalletBalanceDTO $dto)
     {
-        $user = User::find($dto->user_id);
+        $user = User::where('id', $dto->user_id)->lockForUpdate()->first();
         $user->debit($dto->value);
     }
 
     public function creditValueToUserWallet(ChangeUserWalletBalanceDTO $dto)
     {
-        $user = User::find($dto->user_id);
+        $user = User::where('id', $dto->user_id)->lockForUpdate()->first();
         $user->credit($dto->value);
     }
 }
