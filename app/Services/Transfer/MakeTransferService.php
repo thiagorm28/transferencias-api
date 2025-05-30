@@ -20,7 +20,6 @@ class MakeTransferService
         private IExternalAuthRepository $externalAuthRepository,
         private ITransferRepository $transferRepository,
         private IUserRepository $userRepository,
-        private SendTransferNotificationService $sendTransferNotificationService
     ) {}
 
     public function execute(MakeTransferDTO $dto): void
